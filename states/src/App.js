@@ -29,7 +29,12 @@ function App() {
   useEffect(()=>{
     fetchlist("https://crio-location-selector.onrender.com/countries")
     .then((countrylist)=>{
-      setCountryList(countrylist);
+     let uniqueArray = countrylist.filter(function(item, pos) {
+      const a = item.trim();
+      return countrylist.indexOf(a) === pos;
+  })
+
+      setCountryList(uniqueArray);
     })
     .catch((e)=>{
       console.log(e.message)
