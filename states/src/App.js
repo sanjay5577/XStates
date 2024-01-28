@@ -50,8 +50,14 @@ function App() {
 
       fetchlist(`https://crio-location-selector.onrender.com/country=${select.selectcountry}/states`)
     .then((statelist)=>{
-      console.log(statelist);
-      setStateList(statelist);
+      if(statelist){
+        console.log(statelist);
+        setStateList(statelist);
+      }
+      else{
+        setStateList([]);
+      }
+      
     })
     .catch((e)=>{
       console.log(e.message)
@@ -67,8 +73,14 @@ function App() {
     if(select.selectstate !=="Select State" && select.selectstate !=="N/A"){
       fetchlist(`https://crio-location-selector.onrender.com/country=${select.selectcountry}/state=${select.selectstate}/cities`)
     .then((citylist)=>{
-      console.log(citylist);
-      setCityList(citylist);
+      if(citylist){
+        console.log(citylist);
+        setCityList(citylist);
+      }
+      else{
+        setCityList([]);
+      }
+      
     })
     .catch((e)=>{
       console.log(e.message)
@@ -97,7 +109,7 @@ function App() {
   }
 
 
-
+console.log(countrylist)
 
   return (
     <div className="App">
@@ -109,9 +121,9 @@ function App() {
             onChange={handleselect}
             
         >
-          <option>Select Country</option>
+          <option className="countryoptions" disabled>Select Country</option>
           {countrylist.length !==0 && countrylist.map((item) => (
-            <option >
+            <option className="countryoptions">
                 {item}
             </option>
             ))}
@@ -125,7 +137,7 @@ function App() {
             onChange={handleselect}
             
         >
-          <option>Select State</option>
+          <option disabled>Select State</option>
           {statelist.length !==0 && statelist.map((item) => (
             <option >
                 {item}
@@ -141,7 +153,7 @@ function App() {
             onChange={handleselect}
             
         >
-          <option>Select City</option>
+          <option disabled>Select City</option>
           {citylist.length !==0 && citylist.map((item) => (
             <option >
                 {item}
