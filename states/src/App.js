@@ -167,7 +167,7 @@ console.log(countrylist)
             
         </select>
 
-        {select.selectcity !=="Select City" &&<h4>You Selected {select.selectcity}, {select.selectstate}, {select.selectcountry}</h4>}
+        {select.selectcity !=="Select City" &&<h4>You selected {select.selectcity}, {select.selectstate}, {select.selectcountry}</h4>}
     </div>
   );
 }
