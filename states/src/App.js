@@ -29,13 +29,13 @@ function App() {
   useEffect(()=>{
     fetchlist("https://crio-location-selector.onrender.com/countries")
     .then((countrylist)=>{
-  //    let uniqueArray = countrylist.filter(function(item, pos) {
-  //     const a = item.trim();
-  //     return countrylist.indexOf(a) === pos;
-  // })
-
-  //     setCountryList(uniqueArray);
-         setCountryList(countrylist);
+      if(countrylist){
+        setCountryList(countrylist);
+      }
+      else{
+        setCountryList([]);
+      }
+         
     })
     .catch((e)=>{
       console.log(e.message)
@@ -105,6 +105,11 @@ function App() {
       setStateList([]);
       select.selectstate ="Select State"
     }
+
+    if(name ==="selectstate"){
+      setCityList([]);
+      select.selectcity ="Select City"
+    }
     setSelected((values)=> ({...values, [name]:value}));
   }
 
@@ -124,7 +129,7 @@ console.log(countrylist)
           <option className="countryoptions" disabled>Select Country</option>
           {countrylist.length !==0 && countrylist.map((item) => (
             <option className="countryoptions">
-                {item}
+                {item[0]===" "?`&#160;${item}`: item}
             </option>
             ))}
             
